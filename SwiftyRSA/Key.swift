@@ -71,9 +71,9 @@ public extension Key {
             throw SwiftyRSAError.pemFileNotFound(name: pemName)
         }
         let keyString = try String(contentsOf: URL(fileURLWithPath: path), encoding: .utf8)
-        var str = keyString as NSString
-        let replaceString = str.replacingOccurrences(of: "\r", with: "")
-        try self.init(pemEncoded: keyString)
+        let str = keyString as NSString
+        let replaceString = str.replacingOccurrences(of: "\r", with: "") as String
+        try self.init(pemEncoded: replaceString)
     }
     
     /// Creates a private key with a DER file.
